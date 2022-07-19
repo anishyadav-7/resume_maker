@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/resume_style.css" media="screen">
+    <link rel="stylesheet" href="/css/resume_print.css" media="print">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300&family=Lato&family=PT+Sans:wght@700&family=Raleway:wght@700&display=swap" rel="stylesheet"> 
+    <title>{{name}}</title>
+</head>
+<body>
+    <div class="container">
+        <div id="header" class="row-flex" style="justify-content: space-between;">
+            <div class="left-box">
+                <p><span id="name">{{name}}</span><br>
+                {{bio}}</p>
+            </div>
+            <div class="right-box">
+                <ul class="list-none">
+                    <li><span class="material-icons">call</span> <span style="padding-bottom: 1px;"> {{phone}}</span></li>
+                    <li><span class="material-icons">email</span><a href="mailto:kishanverma2312@gmail.com"> {{email}}</a></li>
+                    <li><span class="material-icons">link</span><a href="www.linkedin.com/in/kishan-23"> {{linkedin}}</a></li>
+                    {{#each portfolio}}
+                    <li><span class="material-icons">link</span><a href="{{link}}"> {{title}}</a></li>
+                    {{/each}}
+                    <li><i class="material-icons">home</i> {{place}}</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="content gradient-bg">
+            <div class="content-box">
+                <h2>EDUCATION</h2>
+
+                {{#each education}}
+                <div class="content-item">
+                    <h3>{{college}}</h3>
+                    <p>{{degree}}<br>
+                    <span><sub>{{start}}-{{end}}</sub></span><br>
+                    <span>{{major}}</span></p>
+                    <span>{{score}}</span>
+                </div>
+                {{/each}}
+                
+            </div>
+    
+            <div class="content-box">
+                    <h2>TECHNICAL SKILLS</h2>
+                    <ul>
+                        {{#each skills}}
+                        <li><b>{{category}} </b> {{skill_set}} </li>
+                        {{/each}}
+                    </ul>
+            </div>
+
+            {{#if has_project}}
+            <div class="content-box">
+                <h2>PROJECTS</h2>
+                {{#each projects}}
+                <div class="content-item">
+                    <h3>{{title}}</h3>
+                    <span>{{tech_stack}}</span><br>
+                    <span><sub>{{start}}-{{end}}</sub></span><br>
+                    <p>{{details}}</p>
+                </div>
+                {{/each}}
+                
+            </div>
+            {{/if}}
+            
+
+            {{#if has_experience}}
+            <div class="content-box">
+                <h2>Work Experience</h2>
+                {{#each experience}}
+                <div class="content-item">
+                    <h3>{{role}}</h3>
+                    <span>{{company}}</span><br>
+                    <span><sub>{{start}}-{{end}}</sub></span><br>
+                    <p>{{details}}</p>
+                </div>
+                {{/each}}
+                
+            </div>
+            {{/if}}
+
+        </div>
+        <div class="no-print">
+            <button id="printBtn">Print</button>
+            <form action="/save_resume" method="post">
+                <label for="resname">Enter resume name</label>
+                <input type="text" id="resname" name="name">
+                <input type="submit" class="btn btn-success" value="Save">
+            </form>
+            
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('printBtn').addEventListener('click',(e)=>{
+            window.print();
+        })
+    </script>
+</body>
+</html>

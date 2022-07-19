@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/resume_style.css" media="screen">
+    <link rel="stylesheet" href="/css/resume_print.css" media="print">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300&family=Lato&family=PT+Sans:wght@700&family=Raleway:wght@700&display=swap" rel="stylesheet">
+    <title>{{name}}</title>
+</head>
+<body>
+    <div class="container">
+
+        <div id="header" class="col-flex" style="justify-content: space-around;">
+            <div id="name" style="font-size: 50px;">{{name}}</div>
+            <div id="bio">{{bio}}</div>
+        </div>
+
+        <div class="content">
+            <div class="row-flex" style="justify-content: space-between;" id="left-box">
+
+                <div style="width:62%;">
+                    
+                    <div class="content-box">
+                        <h2 class="color-1">EDUCATION</h2>
+                        {{#each education}}
+                        <div class="content-item">
+                            <h3>{{college}}</h3>
+                            <p>{{degree}}<br>
+                                <span style="font-family: 'calibri' ;"><i>{{major}} </i> <small>{{start}}-{{end}}</small> </span>
+                            </p>
+                            <span>{{score}}</span>
+                        </div>
+                        {{/each}}
+                        
+                    </div>
+
+                    {{#if has_project}}
+                    <div class="content-box">
+                        <h2 class="color-1">PROJECTS</h2>
+                        {{#each projects}}
+                        <div class="content-item">   
+                            <h3>{{title}}</h3>
+                            <span><i>{{tech_stack}} </i> <small>{{start}}-{{end}}</small></span><br>
+                            <p>
+                            {{details}}
+                            </p> 
+                        </div>
+                        {{/each}}
+                    </div>
+                    {{/if}}
+
+                    {{#if has_experience}}
+                    <div class="content-box">
+                        <h2 class="color-1">Experience</h2>
+                        {{#each experience}}
+                        <div class="content-item">   
+                            <h3>{{role}}</h3>
+                            <span><i>{{company}} </i> <small>{{start}}-{{end}}</small></span><br>
+                            <p>
+                            {{details}}
+                            </p> 
+                        </div>
+                        {{/each}}
+                    </div>
+                    {{/if}}
+
+                </div>
+
+                <div style="width:35%; height:900px; background-color: rgb(59, 46, 46); color: white; padding: 10px;">
+
+                    <div class="content-item">
+                        <h2 class="text-center color-2">Contact</h2>
+                        <ul class="list-none">
+                            <li><span class="material-icons">call</span> <span style="padding-bottom: 1px;">+91
+                                    {{phone}}</span></li>
+                            <li><span class="material-icons">email</span><a href="mailto:{{email}}">
+                                    {{email}}</a></li>
+                            <li><span class="material-icons">link</span>Linkedin: <a href="{{linkedin}}">
+                                    {{linkedin}}</a></li>
+                            
+                            {{#each portfolio}}
+                            <li><span class="material-icons">link</span>{{title}}: <a href="{{link}}">
+                                    {{link}}</a></li>
+                            {{/each}}
+
+                            <li><i class="material-icons">home</i> {{place}}</li>
+                        </ul>
+                    </div>
+
+                    <div class="content-item text-center" style="margin-top: 40px;">
+                        <h2 class="color-2">TECHNICAL SKILLS</h2>
+                        {{#each skills}}
+                        <div class="skills">
+                            <h4>{{category}}</h4>
+                            <p class="skillset"> {{skill_set}}</p>
+                        </div>
+                        {{/each}}
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+        <div class="no-print">
+            <button id="printBtn">Print</button>
+            <form action="/save_resume" method="post">
+                <label for="resname">Enter resume name</label>
+                <input type="text" id="resname" name="name">
+                <input type="submit" class="btn btn-success" value="Save">
+            </form>
+            
+        </div>
+
+    </div>
+
+    <script>
+        document.getElementById('printBtn').addEventListener('click',(e)=>{
+            window.print();
+        })
+    </script>
+</body>
+
+</html>
